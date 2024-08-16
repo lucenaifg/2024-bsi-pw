@@ -1,6 +1,6 @@
-package br.edu.ifg.luziania.model;
+package br.edu.ifg.luziania.model.dto;
 
-public class Usuario {
+public class UsuarioDTO {
 
     private Integer id;
     private String nome;

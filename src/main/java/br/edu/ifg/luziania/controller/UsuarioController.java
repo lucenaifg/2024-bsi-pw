@@ -1,7 +1,7 @@
 package br.edu.ifg.luziania.controller;
 
-import br.edu.ifg.luziania.model.Usuario;
-import br.edu.ifg.luziania.model.UsuarioModel;
+import br.edu.ifg.luziania.model.dto.UsuarioDTO;
+import br.edu.ifg.luziania.model.bo.UsuarioBO;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.inject.Inject;
@@ -17,7 +17,7 @@ public class UsuarioController {
     @Inject
     Template usuarioView;
 
-    private static UsuarioModel usuarioModel = new UsuarioModel();
+    private static UsuarioBO usuarioBO = new UsuarioBO();
 
     @GET
     @Path("view")
@@ -29,15 +29,15 @@ public class UsuarioController {
     @GET
     @Path("listar")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Usuario> listarUsuarios(){
-        return usuarioModel.getUsuarios();
+    public List<UsuarioDTO> listarUsuarios(){
+        return usuarioBO.getUsuarios();
     }
 
     @POST
     @Path("salvar")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response salvarUsuario(Usuario usuario){
-        return usuarioModel.addUsuario(usuario);
+    public Response salvarUsuario(UsuarioDTO usuarioDTO){
+        return usuarioBO.addUsuario(usuarioDTO);
     }
 }
