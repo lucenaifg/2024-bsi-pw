@@ -2,8 +2,9 @@ package br.edu.ifg.luziania.model.dto;
 
 public class UsuarioDTO {
 
-    private Integer id;
     private String nome;
+    private String email;
+    private String senha;
 
     public String getNome() {
         return nome;
@@ -13,11 +14,19 @@ public class UsuarioDTO {
         this.nome = nome;
     }
 
-    public Integer getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

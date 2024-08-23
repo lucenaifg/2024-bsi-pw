@@ -1,14 +1,18 @@
 function criarObjetoUsuarioDTO(){
     return {
         id: null,
-        nome: ""
+        nome: "",
+        email: "",
+        senha: ""
     };
 }
 
 function popularUsuarioDTO(usuarioDTO){
     //Copiar valor do input para formulario
     usuarioDTO.nome = document.getElementById('nome').value;
-    return usuario;
+    usuarioDTO.email = document.getElementById('email').value;
+    usuarioDTO.senha = document.getElementById('senha').value;
+    return usuarioDTO;
 }
 
 function limparFormulario(){
@@ -52,7 +56,7 @@ function atualizarLista() {
             userList.innerHTML = '';
             usuarios.forEach(usuarioDTO => {
                 const li = document.createElement('li');
-                li.textContent = 'Id: '+usuarioDTO.id+', Nome: '+usuarioDTO.nome;
+                li.textContent = 'Id: '+usuarioDTO.id+', Nome: '+usuarioDTO.nome+', E-mail: '+usuarioDTO.email;
                 userList.appendChild(li);
             });
         })

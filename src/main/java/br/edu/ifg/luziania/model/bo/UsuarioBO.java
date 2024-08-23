@@ -1,30 +1,30 @@
 package br.edu.ifg.luziania.model.bo;
 
+import br.edu.ifg.luziania.model.dao.UsuarioDAO;
 import br.edu.ifg.luziania.model.dto.UsuarioDTO;
+import br.edu.ifg.luziania.model.dto.list.UsuarioListDTO;
+import br.edu.ifg.luziania.model.entity.Usuario;
 import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dependent
 public class UsuarioBO {
 
-    //Simulação de banco de dados
-    private List<UsuarioDTO> usuarioDTOS = new ArrayList<UsuarioDTO>();
+    @Inject
+    UsuarioDAO dao;
 
-    public List<UsuarioDTO> getUsuarios() {
-        return usuarioDTOS;
+    public List<UsuarioListDTO> getUsuarios() {
+        return dao.getAllUsuario();
     }
 
-    public void setUsuarios(List<UsuarioDTO> usuarioDTOS) {
-        this.usuarioDTOS = usuarioDTOS;
-    }
-
-    public Response addUsuario(UsuarioDTO usuarioDTO) {
-        // Simples lógica para definir um ID
-        usuarioDTO.setId(usuarioDTOS.size() + 1);
-        usuarioDTOS.add(usuarioDTO);
-        return Response.status(Response.Status.CREATED).entity(usuarioDTO).build();
+    @Transactional
+    public Response saveUsuario(UsuarioDTO usuarioDTO) {
+        Usuario usuario = new Usuario(usuarioDTO);
+        dao.save(usuario);
+        return Response.status(Response.Status.CREATED).entity(usuario.getId()).build();
     }
 }
